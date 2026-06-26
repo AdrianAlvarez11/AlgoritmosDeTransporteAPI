@@ -1,3 +1,66 @@
 :root {
 
 }
+
+html, body {
+    margin: 0;
+    min-height: 1dvh;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header{
+    background-color: blue;
+}
+
+nav {
+    display: flex;
+}
+
+
+header nav ul {
+    position: absolute;
+    list-style-type: none ;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid gray;
+    width: 80px;
+    left: 10px;
+    top: 6px;
+    padding: 0;
+}
+
+header nav ul li {
+    padding: 2px 5px;
+
+}
+
+header nav ul li:hover {
+    background-color: #ccc;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+section #selector_tamano {
+    display: flex;
+    flex-direction: column;
+}
+
+
+section #selector_metodo {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.invisible {
+    visibility: hidden;
+}
+
+
+
+
+
+

@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algoritmos de transporte</title>
+    <link rel="stylesheet" href="/AlgoritmosDeTransporteAPI/wwwroot/css/estilo.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>Reiniciar</li>
-            <li>Imprimir</li>
-            <li>Guardar</li>
-        </ul>
-    </nav>
-
+    <header>
+        <label for="">a</label>
+        <nav>
+            <ul>
+                <li>Reiniciar</li>
+                <li>Imprimir</li>
+                <li>Guardar</li>
+            </ul>
+        </nav>
+    </header>
+    
     <main>
         <h1>Método de transporte</h1>
 
         <!-- ----------------------------------------- -->
         <section data-section="ingresar-datos">
 
-            <div>
-                <span>Ingresa la cantidad de lineas</span>
-                <select>
+            <div id="selector_tamano">
+                <span>Ingresa la cantidad de lineas:</span>
+                <select id="filas">
                     <option selected>2</option>
                     <option>3</option>
                     <option>4</option>
@@ -31,8 +35,8 @@
                     <option>7</option>
                 </select>
             
-                <span>Ingresa la cantidad de lineas</span>
-                <select>
+                <span>Ingresa la cantidad de columnas:</span>
+                <select id="columnas">
                     <option selected>2</option>
                     <option>3</option>
                     <option>4</option>
@@ -45,7 +49,7 @@
             
             <!-- tabla -->
             
-            <div>
+            <div id="selector_metodo">
                 <span>Selecciona un método</span>
                 <select>
                     <option selected>Esquina noroeste</option>
@@ -60,7 +64,7 @@
         </section>
 
 
-        <section data-section="procedimiento">
+        <section data-section="procedimiento" hidden>
 
             <!-- tabla -->
                 
@@ -75,7 +79,7 @@
 
         <!-- ----------------------------------------- -->
 
-        <section id="resultados">
+        <section id="resultados" hidden>
 
             <div>
                 <div>
