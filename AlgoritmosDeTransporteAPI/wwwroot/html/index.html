@@ -28,105 +28,41 @@
             <div id="selector_tamano">
                 <span>Ingresa la cantidad de lineas:</span>
                 <select id="filas">
-                    <option selected>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
                 </select>
             
                 <span>Ingresa la cantidad de columnas:</span>
                 <select id="columnas">
-                    <option selected>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
                 </select>
-                <button>Crear tabla</button>
+                <button id="crearTabla">Crear tabla</button>
             </div>
             
             <!-- tabla -->
-            <div class="tabla-ingreso">
-
-                    <div class="header">
-                        <span>Origen / Destino</span>
-                    </div>
-
-                    <div class="header">
-                        <span>1</span>
-                    </div>
-                    <div class="header">
-                        <span>2</span>
-                    </div>
-                    <div class="header">
-                        <span>3</span>
-                    </div>
-                    <div class="header">
-                        <span>4</span>
-                    </div>
-                    <div class="header">
-                        <span>5</span>
-                    </div>
-                    <div class="header">
-                        <span>6</span>
-                    </div>
-                    <div class="header">
-                        <span>Oferta</span>
-                    </div>
-
-
-                    <div class="lateral">
-                        <span>A</span>
-                    </div>
-                    <div class="lateral">
-                        <span>B</span>
-                    </div>
-                    <div class="lateral">
-                        <span>C</span>
-                    </div>
-                    <div class="lateral">
-                        <span>D</span>
-                    </div>
-                    <div class="lateral">
-                        <span>E</span>
-                    </div>
-                    <div class="lateral">
-                        <span>F</span>
-                    </div>
-                    <div class="lateral">
-                        <span>Demanda</span>
-                    </div>
-
-
-
-                <div class="celda">
-                    <input type="text"></span>
-                </div>
-
-                <div class="celda">
-                    <input type="text"></span>
-                </div>
-
-                <div class="celda">
-                    <input type="text"></span>
-                </div>
-
-                <div class="celda">
-                    <input type="text"></span>
-                </div>
-            </div>
+            <div class="tabla-ingreso" id="tabla_ingreso"></div>
             
 
-
-            <template id="template_celda_input">
-                <div class="celda">
-                    <input type="text"></span>
+            <template id="template_header_inicial">
+                <div class="header">
+                    <span class="texto-header"></span>
                 </div>
             </template>
 
+            <template id="template_celda_input">
+                <div class="celda">
+                    <input type="number" class="input-celda" min="0">
+                </div>
+            </template>
 
             <div id="selector_metodo">
                 <span>Selecciona un método:</span>
