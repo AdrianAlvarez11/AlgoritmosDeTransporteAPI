@@ -71,6 +71,25 @@ section #selector_tamano {
     gap: 4px;
 }
 
+section .tabla-ingreso {
+    display: grid;
+    padding: 4px;
+    gap: 4px;
+}
+
+.celda {
+    background-color: var(--primario-suave);
+    
+}
+
+.celda input {
+    border: none;
+    background-color: #d5ffe8;
+    justify-self: center;
+    display: block;
+    text-align: center;
+    padding: 6px 4px;
+}
 
 section #selector_metodo {
     display: grid;
@@ -82,6 +101,8 @@ section #selector_metodo {
 section #selector_metodo span, section #selector_metodo select {
     grid-column: span 2;
 }
+
+
 
 .invisible {
     visibility: hidden;
