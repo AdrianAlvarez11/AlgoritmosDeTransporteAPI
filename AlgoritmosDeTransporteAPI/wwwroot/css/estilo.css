@@ -73,13 +73,33 @@ section #selector_tamano {
 
 section .tabla-ingreso {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     padding: 4px;
     gap: 4px;
+    overflow-x: scroll;
+}
+
+section .tabla-ingreso > div {
+    width: 100px;
+    min-height: 35px;
+    text-align: center;
+    align-content: center;
+    border-radius: 5px;
+}
+
+.header {
+    background-color: var(--primario-fuerte);
+    grid-row: 1;
+}
+
+.lateral {
+    background-color: var(--primario-fuerte);
+    grid-column: 1;
 }
 
 .celda {
     background-color: var(--primario-suave);
-    
+    grid-row-start: 2;
 }
 
 .celda input {
@@ -88,7 +108,7 @@ section .tabla-ingreso {
     justify-self: center;
     display: block;
     text-align: center;
-    padding: 6px 4px;
+    padding: 6px 4px; 
 }
 
 section #selector_metodo {
