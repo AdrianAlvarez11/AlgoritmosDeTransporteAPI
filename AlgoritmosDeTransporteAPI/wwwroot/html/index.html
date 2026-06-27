@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algoritmos de transporte</title>
     <link rel="stylesheet" href="/AlgoritmosDeTransporteAPI/wwwroot/css/estilo.css">
+    <script src="/AlgoritmosDeTransporteAPI/wwwroot/js/script.js"></script>
 </head>
 <body>
     <header>
-        <label for="">a</label>
-        <nav>
+        <label id="label_opciones">a</label>
+        <nav class="invisible">
             <ul>
-                <li>Reiniciar</li>
-                <li>Imprimir</li>
-                <li>Guardar</li>
+                <li><button>Reiniciar</button></li>
+                <li><button>Imprimir</button></li>
+                <li><button>Guardar</button></li>
             </ul>
         </nav>
     </header>
@@ -48,19 +49,20 @@
             </div>
             
             <!-- tabla -->
-            
+
+
             <div id="selector_metodo">
-                <span>Selecciona un método</span>
+                <span>Selecciona un método:</span>
                 <select>
                     <option selected>Esquina noroeste</option>
                     <option>Voguel</option>
                     <option>Euler</option>
                 </select>
+                
+                
+                <button>Solución paso a paso</button>
+                <button>Solución directa</button>
             </div>
-            
-            
-            <button>Solución paso a paso</button>
-            <button>Solución directa</button>
         </section>
 
 

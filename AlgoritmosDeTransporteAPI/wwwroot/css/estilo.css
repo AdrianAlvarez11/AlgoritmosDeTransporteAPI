@@ -1,15 +1,23 @@
 :root {
-
+    --fondo: #EDFFFE;
+    --primario-suave :#E0FFEE;
+    --primario-fuerte :#A6FFD0;
+    --secundario-suave:#929CC9;
+    --secundario-fuerte:#A5B5FF;
+    --r:#ff0000;
+    --borde:#ccc;
+    --sombra:#bbbec1;
 }
 
 html, body {
     margin: 0;
     min-height: 1dvh;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+background-color: var(--fondo);
 }
 
 header{
-    background-color: blue;
+    background-color: var(--primario-fuerte);
 }
 
 nav {
@@ -31,29 +39,49 @@ header nav ul {
 
 header nav ul li {
     padding: 2px 5px;
+    padding: 0;
 
 }
 
+
 header nav ul li:hover {
-    background-color: #ccc;
+    background-color: var(--fondo);
+}
+header nav ul li button {
+    padding: 2px 5px;
+    margin: 0;
+    width: 100%;
+    border: none;
+    background: transparent;
 }
 
 main {
     display: flex;
     flex-direction: column;
+    padding: 0 0.6em;
+}
+
+main h1 {
+    text-align: center;
 }
 
 section #selector_tamano {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 
 section #selector_metodo {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 8px;
 }
 
+
+section #selector_metodo span, section #selector_metodo select {
+    grid-column: span 2;
+}
 
 .invisible {
     visibility: hidden;
