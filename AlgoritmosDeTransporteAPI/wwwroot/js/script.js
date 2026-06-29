@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const label_nav = document.getElementById('label_opciones');
     const nav = document.querySelector('nav');
 
+    //////////////////////////////////////////
+    //Menu superior
     window.addEventListener('click', function(e) {
         if (label_nav.contains(e.target)) {
             nav.classList.toggle('invisible');
@@ -16,6 +18,51 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+
+
+    ///////////////////////////////////
+    //Navegacion
+    const vistaGuardada = sessionStorage.getItem('idVista');
+    if (vistaGuardada){
+        CambiarVista(vistaGuardada);
+    }
+
+    document.querySelectorAll('[data-section]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idDestino = btn.getAttribute('data-section');
+
+            CambiarVista(idDestino);
+        });
+    });
+
+    function CambiarVista(idVista){
+        const VistaDestino = document.getElementById(idVista);
+        if (VistaDestino) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(s => s.hidden = true);
+            
+            // Mostrar y guardar la sección con IdVista
+            VistaDestino.hidden = false;
+            sessionStorage.setItem('idVista', idVista);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /////////////////////////////////
+    //Creacion de celdas
 
     const slcFilas = document.getElementById("filas");
     const slcColumnas = document.getElementById("columnas");
@@ -97,6 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
             tablaIngreso.appendChild(clonDemanda);
         }
 
-        tablaIngreso.appendChild(crearHeader(""));
+        // tablaIngreso.appendChild(crearHeader(""));
     });
 });

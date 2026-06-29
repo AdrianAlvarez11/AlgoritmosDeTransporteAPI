@@ -12,7 +12,7 @@
         <label id="label_opciones">a</label>
         <nav class="invisible">
             <ul>
-                <li><button>Reiniciar</button></li>
+                <li><button data-section="ingresar-datos">Reiniciar</button></li>
                 <li><button>Imprimir</button></li>
                 <li><button>Guardar</button></li>
             </ul>
@@ -23,10 +23,10 @@
         <h1>Método de transporte</h1>
 
         <!-- ----------------------------------------- -->
-        <section data-section="ingresar-datos">
+        <section id="ingresar-datos">
 
             <div id="selector_tamano">
-                <span>Ingresa la cantidad de lineas:</span>
+                <span>Cantidad de lineas:</span>
                 <select id="filas">
                     <option value="2" selected>2</option>
                     <option value="3">3</option>
@@ -36,7 +36,7 @@
                     <option value="7">7</option>
                 </select>
             
-                <span>Ingresa la cantidad de columnas:</span>
+                <span>Cantidad de columnas:</span>
                 <select id="columnas">
                     <option value="2" selected>2</option>
                     <option value="3">3</option>
@@ -73,16 +73,17 @@
                 </select>
                 
                 
-                <button>Solución paso a paso</button>
-                <button>Solución directa</button>
+                <button data-section="procedimiento">Solución paso a paso</button>
+                <button data-section="resultados">Solución directa</button>
             </div>
         </section>
 
 
-        <section data-section="procedimiento" hidden>
+        <section id="procedimiento" hidden>
 
             <!-- tabla -->
-                
+            <div class="tabla-pasos" id="tabla_pasos"></div>
+            
             <div>
                 <img>
                 <textarea></textarea>
