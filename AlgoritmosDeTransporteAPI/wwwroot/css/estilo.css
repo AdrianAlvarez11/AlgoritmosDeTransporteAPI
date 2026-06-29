@@ -65,10 +65,23 @@ main h1 {
     text-align: center;
 }
 
+section select {
+    padding: 2px 0;
+}
+
+section select, section button {
+    border-radius: 5px;
+    border: 1px solid #767676;
+}
+
 section #selector_tamano {
     display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.r {
+    color: red;
 }
 
 section .tabla-ingreso {
@@ -88,17 +101,23 @@ section .tabla-ingreso > div {
 
 }
 
-.header {
+.header_inicial {
     background-color: var(--primario-fuerte);
 }
 
-.lateral {
-    background-color: var(--primario-fuerte);
-}
-
-.celda {
+.celda_inicial {
     background-color: var(--primario-suave);
 }
+
+.header_solucion {
+    background-color: var(--secundario-fuerte);
+}
+
+.celda_solucion {
+    background-color: var(--secundario-suave);
+}
+
+
 
 .celda input {
     border: none;

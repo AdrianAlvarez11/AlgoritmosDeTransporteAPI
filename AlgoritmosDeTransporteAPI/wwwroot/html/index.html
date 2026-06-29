@@ -46,6 +46,7 @@
                     <option value="7">7</option>
                 </select>
                 <button id="crearTabla">Crear tabla</button>
+                <span id="error" class="r"></span>
             </div>
             
             <!-- tabla -->
@@ -53,13 +54,13 @@
             
 
             <template id="template_header_inicial">
-                <div class="header">
+                <div class="header_inicial">
                     <span class="texto-header"></span>
                 </div>
             </template>
 
             <template id="template_celda_input">
-                <div class="celda">
+                <div class="celda_inicial">
                     <input type="number" class="input-celda" min="0">
                 </div>
             </template>
@@ -73,10 +74,11 @@
                 </select>
                 
                 
-                <button data-section="procedimiento">Solución paso a paso</button>
+                <button data-section="procedimiento" id="SolucionPaso">Solución paso a paso</button>
                 <button data-section="resultados">Solución directa</button>
             </div>
         </section>
+
 
 
         <section id="procedimiento" hidden>
@@ -84,6 +86,18 @@
             <!-- tabla -->
             <div class="tabla-pasos" id="tabla_pasos"></div>
             
+            <template id="template_header_paso">
+                <div class="header_solucion">
+                    <span class="texto-header"></span>
+                </div>
+            </template>
+
+            <template id="template_celda_span">
+                <div class="celda_solucion">
+                    <span class="span-celda"></span>
+                </div>
+            </template>
+
             <div>
                 <img>
                 <textarea></textarea>
