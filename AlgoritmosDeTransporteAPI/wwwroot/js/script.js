@@ -165,6 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
         //tabla procedimiento
          
         spnError.textContent = "";
+
+        const datosGuardados = JSON.parse(localStorage.getItem('datosMatriz')) || {};
+        let indexCelda = 0;
+
         //template de encabezado y celda
         const encabezado = document.getElementById("template_header_inicial");
         const celda = document.getElementById("template_celda_input");
@@ -211,20 +215,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 span.dataset.fila = letraFila;
                 span.dataset.columna = c + 1;
-                
+
+                span.textContent = datosGuardados[`celda_${(indexCelda)}`] || '';
+                indexCelda++;
+
                 tablaPasos.appendChild(clonCelda);
             }
             
             const clonOferta = tplCelda.content.cloneNode(true);
+            const spanOferta = clonOferta.querySelector('.span-celda');
+            
+            spanOferta.textContent = datosGuardados[`celda_${indexCelda}`] || '';
+            indexCelda++;
+
             tablaPasos.appendChild(clonOferta);
         }
-            
             
             
         tablaPasos.appendChild(crearHeader("Demanda"));
         
         for (let c = 0; c < columnas; c++) {
-            const clonDemanda = tplCelda.content.cloneNode(true);
+           const clonDemanda = tplCelda.content.cloneNode(true);
+            const spanDemanda = clonDemanda.querySelector('.span-celda');
+            
+            spanDemanda.textContent = datosGuardados[`celda_${indexCelda}`] || '';
+            indexCelda++;
+            
             tablaPasos.appendChild(clonDemanda);
         }
             
