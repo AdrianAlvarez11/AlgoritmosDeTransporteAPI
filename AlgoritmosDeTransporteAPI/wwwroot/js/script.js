@@ -77,9 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
     btnCrear.addEventListener('click', function(e){
         spnError.textContent = "";
         //template de encabezado y celda
-        const encabezado = document.getElementById("template_header_inicial");
-        const celda = document.getElementById("template_celda_input");
-
 
         const filas = Number(slcFilas.value);
         const columnas = Number(slcColumnas.value);
@@ -158,9 +155,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     const btnSolPaso = document.getElementById("SolucionPaso");
+    const tablaPasos = document.getElementById("tabla_pasos");
+
 
     btnSolPaso.addEventListener('click', function(e){ 
 
+        guardarDatosIniciales();
         //////////////////////////////////
         //tabla procedimiento
          
@@ -173,74 +173,74 @@ document.addEventListener('DOMContentLoaded', function() {
         const filas = Number(slcFilas.value);
         const columnas = Number(slcColumnas.value);
         
-        tablaIngreso.innerHTML = '';
+        tablaPasos.innerHTML = '';
          
          
         const columnasTotalesGrid = columnas + 2; 
-        tablaIngreso.style.gridTemplateColumns = `repeat(${columnasTotalesGrid}, 1fr)`;
+        tablaPasos.style.gridTemplateColumns = `repeat(${columnasTotalesGrid}, 1fr)`;
          
          
-        const tplHeader = document.getElementById("template_header_inicial");
-        const tplCelda = document.getElementById("template_celda_input");
+        const tplHeader = document.getElementById("template_header_paso");
+        const tplCelda = document.getElementById("template_celda_span");
          
-        // Función para clonar y colocar texto en encabezados
         function crearHeader(texto) {
             const clon = tplHeader.content.cloneNode(true);
             clon.querySelector('.texto-header').textContent = texto;
             return clon;
         }
             
-        //Crear toda la primera fila
-        // Celda esquina superior izquierda
-        tablaIngreso.appendChild(crearHeader("Origen / Destino"));
+        tablaPasos.appendChild(crearHeader("Origen / Destino"));
             
         for (let c = 1; c <= columnas; c++) {
-            tablaIngreso.appendChild(crearHeader(c));
+            tablaPasos.appendChild(crearHeader(c));
         }
         
-        tablaIngreso.appendChild(crearHeader("Oferta"));
+        tablaPasos.appendChild(crearHeader("Oferta"));
             
             
         // Crear las filas internas
         
         for (let f = 0; f < filas; f++) {
             
-            // A. Colocar el texto de la celda de la 
             const letraFila = String.fromCharCode(65 + f); 
-            tablaIngreso.appendChild(crearHeader(letraFila));
+            tablaPasos.appendChild(crearHeader(letraFila));
             
-            // B. Celdas intermedias: Los inputs correspondientes a esta fila
             for (let c = 0; c < columnas; c++) {
                 const clonCelda = tplCelda.content.cloneNode(true);
-                const input = clonCelda.querySelector('.input-celda');
+                const span = clonCelda.querySelector('.span-celda');
                 
-                input.dataset.fila = letraFila;
-                input.dataset.columna = c + 1;
+                span.dataset.fila = letraFila;
+                span.dataset.columna = c + 1;
                 
-                tablaIngreso.appendChild(clonCelda);
+                tablaPasos.appendChild(clonCelda);
             }
             
-            // C. Última celda de la fila: El input o espacio de la "Oferta"
-            // Puedes usar el de celda con input para que digiten la oferta
             const clonOferta = tplCelda.content.cloneNode(true);
-            tablaIngreso.appendChild(clonOferta);
+            tablaPasos.appendChild(clonOferta);
         }
             
             
             
-        // Crear la fila final
-        tablaIngreso.appendChild(crearHeader("Demanda"));
+        tablaPasos.appendChild(crearHeader("Demanda"));
         
-        // Inputs para los totales de la demanda (uno por cada columna numérica)
         for (let c = 0; c < columnas; c++) {
             const clonDemanda = tplCelda.content.cloneNode(true);
-            tablaIngreso.appendChild(clonDemanda);
+            tablaPasos.appendChild(clonDemanda);
         }
             
     });
             
             
-            
+    function guardarDatosIniciales() {
+        const datos = {};
+        const inputs = document.querySelectorAll('#tabla_ingreso .input-celda');
+        
+        inputs.forEach((input, index) => {
+            datos[`celda_${index}`] = input.value;
+        });
+        
+        localStorage.setItem('datosMatriz', JSON.stringify(datos));
+    }
             
             
             

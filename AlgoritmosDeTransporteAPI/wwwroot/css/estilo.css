@@ -84,7 +84,7 @@ section #selector_tamano {
     color: red;
 }
 
-section .tabla-ingreso {
+section .tabla-ingreso, section .tabla-pasos {
     display: grid;
     padding: 4px;
     gap: 4px;
@@ -92,13 +92,12 @@ section .tabla-ingreso {
     min-height: 200px;
 }
 
-section .tabla-ingreso > div {
+section .tabla-ingreso > div, section .tabla-pasos > div  {
     width: 100px;
     min-height: 35px;
     text-align: center;
     align-content: center;
     border-radius: 5px;
-
 }
 
 .header_inicial {
