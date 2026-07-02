@@ -17,7 +17,20 @@ background-color: var(--fondo);
 }
 
 header{
+    display: flex;
+    align-items: center;
+ 
     background-color: var(--primario-fuerte);
+}
+
+header label {
+    margin: 0.3em;
+    display: inline-block;
+    font-size: 21px;
+}
+
+header img {
+    height: 32px;
 }
 
 nav {
@@ -152,7 +165,7 @@ section .navegacion_procedimientos {
     width: calc(100% - 1.2em);
 }
 
-.navegacion_procedimientos  textarea {
+.navegacion_procedimientos textarea {
     grid-column: span 2;
     justify-self: center;
     resize: none;
@@ -165,6 +178,31 @@ section .navegacion_procedimientos {
     height: 100px;
 }
 
+section .opciones-resultados {
+    display: flex;
+    justify-self: center;
+    align-items: stretch;
+    gap: 8px;
+    margin: 0.8em 0;
+}
+
+.opciones-resultados button {
+    flex: 1;
+    white-space: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 80px;
+    padding: 4px 6px;
+}
+
+.opciones-resultados button img {
+    height: 30px;
+    width: 30px;
+    
+}
 
 .invisible {
     visibility: hidden;

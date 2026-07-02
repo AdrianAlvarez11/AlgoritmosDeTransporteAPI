@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Algoritmos de transporte</title>
     <link rel="stylesheet" href="/AlgoritmosDeTransporteAPI/wwwroot/css/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <script src="/AlgoritmosDeTransporteAPI/wwwroot/js/script.js"></script>
 </head>
 <body>
     <header>
-        <label id="label_opciones">a</label>
+        <label id="label_opciones"><i class="fas fa-bars  text-primary"></i></label>
         <nav class="invisible">
             <ul>
                 <li><button data-section="ingresar-datos">Reiniciar</button></li>
@@ -17,6 +18,7 @@
                 <li><button>Guardar</button></li>
             </ul>
         </nav>
+        <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/metodotransporte.png">
     </header>
     
     <main>
@@ -111,26 +113,26 @@
 
         <section id="resultados" hidden>
 
-            <div>
-                <div>
-                    <img>
+            <div class="opciones-resultados">
+                <button>
+                    <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/home.png">
                     <span>Volver al inicio</span>
-                </div>
+                </button>
                 
-                <div>
-                    <img>
+                <button>
+                    <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs//downloadPdf.png">
                     <span>Guardar</span>
-                </div>
+                </button>
                 
-                <div>
-                    <img>
+                <button>
+                    <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/printer.png">
                     <span>Imprimir</span>
-                </div>
+                </button>
                 
-                <div>
-                    <img>
+                <button>
+                    <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/continueArrow.png">
                     <span>Continuar</span>
-                </div>
+                </button>
             </div>
 
             <iframe></iframe>
