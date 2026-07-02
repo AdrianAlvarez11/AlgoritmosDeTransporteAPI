@@ -142,6 +142,28 @@ section #selector_metodo span, section #selector_metodo select {
     grid-column: span 2;
 }
 
+section .navegacion_procedimientos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-self: center;
+    justify-items: center;
+    gap: 3px;
+    margin: 0.8em 0;
+    width: calc(100% - 1.2em);
+}
+
+.navegacion_procedimientos  textarea {
+    grid-column: span 2;
+    justify-self: center;
+    resize: none;
+    min-height: 120px;
+    width: 100%;
+}
+
+.navegacion_procedimientos img {
+    grid-row: 2;
+    height: 100px;
+}
 
 
 .invisible {

@@ -13,7 +13,7 @@
         <nav class="invisible">
             <ul>
                 <li><button data-section="ingresar-datos">Reiniciar</button></li>
-                <li><button>Imprimir</button></li>
+                <li><button data-section="resultados">Imprimir</button></li>
                 <li><button>Guardar</button></li>
             </ul>
         </nav>
@@ -73,8 +73,8 @@
                     <option>Euler</option>
                 </select>
                 
-                
-                <button data-section="procedimiento" id="SolucionPaso">Solución paso a paso</button>
+                <!-- data-section="procedimiento" -->
+                <button id="SolucionPaso">Solución paso a paso</button>
                 <button data-section="resultados">Solución directa</button>
             </div>
         </section>
@@ -98,10 +98,10 @@
                 </div>
             </template>
 
-            <div>
-                <img>
+            <div class="navegacion_procedimientos">
+                <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/arrow.png" style="transform: rotate(180deg);">
                 <textarea></textarea>
-                <img>
+                <img src="/AlgoritmosDeTransporteAPI/wwwroot/imgs/arrow.png">
                 
             </div>
         </section>

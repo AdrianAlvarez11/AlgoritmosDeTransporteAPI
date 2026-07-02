@@ -160,13 +160,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     btnSolPaso.addEventListener('click', function(e){ 
 
+        
+        spnError.textContent = "";
         guardarDatosIniciales();
         //////////////////////////////////
         //tabla procedimiento
          
-        spnError.textContent = "";
-
+        if (guardarDatosIniciales()) {
+            CambiarVista("procedimiento");
+        }
+        else {
+            spnError.textContent = "Ingresa un valor a cada celda.";
+            return;
+        }
+        
         const datosGuardados = JSON.parse(localStorage.getItem('datosMatriz')) || {};
+        
+
         let indexCelda = 0;
 
         //template de encabezado y celda
@@ -249,13 +259,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
     function guardarDatosIniciales() {
         const datos = {};
-        const inputs = document.querySelectorAll('#tabla_ingreso .input-celda');
+        const inputs = Array.from(document.querySelectorAll('#tabla_ingreso .input-celda'));
         
+        if (inputs.some(input => input.value.trim() === "")) return false;
+
         inputs.forEach((input, index) => {
-            datos[`celda_${index}`] = input.value;
+            datos[`celda_${index}`] = input.value.trim();
         });
         
         localStorage.setItem('datosMatriz', JSON.stringify(datos));
+        return true;
     }
             
             
