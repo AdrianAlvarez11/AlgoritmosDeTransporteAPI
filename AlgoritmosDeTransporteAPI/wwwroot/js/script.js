@@ -100,12 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
         function crearHeader(texto) {
             const clon = tplHeader.content.cloneNode(true);
             clon.querySelector('.texto-header').textContent = texto;
-            return clon;
+            return clon.querySelector('.header_inicial'); 
         }
 
         //Crear toda la primera fila
         // Celda esquina superior izquierda
-        tablaIngreso.appendChild(crearHeader("Origen / Destino"));
+        const celdaEsquina = tablaIngreso.appendChild(crearHeader("Origen / Destino"));
+        celdaEsquina.classList.add('columna_fija');
         
         for (let c = 1; c <= columnas; c++) {
             tablaIngreso.appendChild(crearHeader(c));
@@ -120,7 +121,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
             // A. Colocar el texto de la celda de la 
             const letraFila = String.fromCharCode(65 + f); 
-            tablaIngreso.appendChild(crearHeader(letraFila));
+            const celdaLetra = crearHeader(letraFila);
+            celdaLetra.classList.add('columna_fija');
+            tablaIngreso.appendChild(celdaLetra);
 
             // B. Celdas intermedias: Los inputs correspondientes a esta fila
             for (let c = 0; c < columnas; c++) {
@@ -142,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         // Crear la fila final
-        tablaIngreso.appendChild(crearHeader("Demanda"));
+        const celdaDemanda = tablaIngreso.appendChild(crearHeader("Demanda")).classList.add("columna_fija");
 
         // Inputs para los totales de la demanda (uno por cada columna numérica)
         for (let c = 0; c < columnas; c++) {
@@ -162,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         spnError.textContent = "";
-        guardarDatosIniciales();
+        //guardarDatosIniciales();
         //////////////////////////////////
         //tabla procedimiento
          
@@ -197,14 +200,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const tplHeader = document.getElementById("template_header_paso");
         const tplCelda = document.getElementById("template_celda_span");
          
+        // function crearHeader(texto) {
+        //     const clon = tplHeader.content.cloneNode(true);
+        //     clon.querySelector('.texto-header').textContent = texto;
+        //     return clon;
+        // }
         function crearHeader(texto) {
             const clon = tplHeader.content.cloneNode(true);
             clon.querySelector('.texto-header').textContent = texto;
-            return clon;
+            return clon.querySelector('.header_solucion'); 
         }
             
-        tablaPasos.appendChild(crearHeader("Origen / Destino"));
-            
+        const celdaEsquina = tablaPasos.appendChild(crearHeader("Origen / Destino"));
+        celdaEsquina.classList.add('columna_fija');
+
         for (let c = 1; c <= columnas; c++) {
             tablaPasos.appendChild(crearHeader(c));
         }
@@ -216,8 +225,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         for (let f = 0; f < filas; f++) {
             
-            const letraFila = String.fromCharCode(65 + f); 
-            tablaPasos.appendChild(crearHeader(letraFila));
+            const letraFila = String.fromCharCode(65 + f);
+            let celdaLetra = tablaPasos.appendChild(crearHeader(letraFila));
+            celdaLetra.classList.add("columna_fija");
             
             for (let c = 0; c < columnas; c++) {
                 const clonCelda = tplCelda.content.cloneNode(true);
@@ -242,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
             
             
-        tablaPasos.appendChild(crearHeader("Demanda"));
+        const celdaDemanda = tablaPasos.appendChild(crearHeader("Demanda")).classList.add("columna_fija");
         
         for (let c = 0; c < columnas; c++) {
            const clonDemanda = tplCelda.content.cloneNode(true);
