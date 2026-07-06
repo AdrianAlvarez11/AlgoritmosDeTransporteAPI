@@ -6,7 +6,7 @@
     --secundario-fuerte:#A5B5FF;
     --r:#ff0000;
     --borde:#ccc;
-    --sombra:#bbbec1;
+    --sombra:#dfefe7cc;
     --fondo-boton-1: #4aab77;
 }
 
@@ -82,7 +82,7 @@ main h1 {
 }
 
 section select {
-    padding: 2px 0;
+    padding: 2px 0 2px 6px;
 }
 
 section select, section button {
@@ -120,6 +120,7 @@ section .tabla-ingreso, section .tabla-pasos {
     gap: 4px;
     overflow-x: auto;
     min-height: 200px;
+    contain: paint;
 }
 
 section .tabla-ingreso {
@@ -133,13 +134,35 @@ section .tabla-ingreso > div, section .tabla-pasos > div  {
     text-align: center;
     align-content: center;
     border-radius: 5px;
-    position: sticky;
-    left: 0;
+}
+
+section .tabla-ingreso span {
+    white-space: nowrap;
 }
 
 .columna_fija {
-    z-index: 3;
-    
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 5;
+    background-color: var(--primario-fuerte) !important;
+    border-radius: 5px;
+    box-shadow: -4px 0px 0px var(--fondo);
+}
+
+#tabla_ingreso > .celda_inicial.columna_fija {
+    background-color: var(--primario-fuerte) !important;
+    box-shadow: -4px 0px 0px var(--fondo);
+}
+
+.columna_fija::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: var(--primario-fuerte) !important; 
+    z-index: -1; 
+    border-radius: 5px;
 }
 
 .header_inicial {
@@ -148,6 +171,7 @@ section .tabla-ingreso > div, section .tabla-pasos > div  {
 
 .celda_inicial {
     background-color: var(--primario-suave);
+    overflow: hidden;
 }
 
 .header_solucion {
@@ -166,9 +190,11 @@ section .tabla-ingreso > div, section .tabla-pasos > div  {
     justify-self: center;
     display: block;
     text-align: center;
-    padding: 6px 0px;
-    width: calc(100% - 16px); 
+    padding: 6px 0px 6px 15px;
+    width: calc(100% - 35px); 
     border-radius: 3px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
 }
 
 section #selector_metodo {
@@ -184,6 +210,7 @@ section #selector_metodo {
     background-color: #daf9f9;
     margin: 0;
     z-index: 10;
+    box-shadow: 0px -4px 15px var(--sombra)
 }
 
 
@@ -279,20 +306,41 @@ section iframe {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4px;
+        justify-self: center;
+        width: 600px;
+        max-width: 100%;
     }
 
     
-    section #selector_tamano select {
-        max-width: 160px;
+    section #selector_tamano span {
+        margin-left: 12px;
     }
 
     section #selector_tamano button {
         grid-column: span 2;
-        max-width: 600px;
     }
 
 
+    /* section #selector_metodo {
+        width: 100% !important; 
+        max-width: 100%;
+        grid-template-columns: 300px 300px; 
+        justify-content: center; 
+        padding: 15px 20px 25px 20px;
+        box-sizing: border-box;
+    } */
 
+}
+
+@media (min-width : 615px) {
+    section #selector_metodo {
+        width: 100% !important; 
+        max-width: 100%;
+        grid-template-columns: 300px 300px; 
+        justify-content: center; 
+        padding: 15px 20px 25px 20px;
+        box-sizing: border-box;
+    }
 
 }
 

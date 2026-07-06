@@ -99,13 +99,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Función para clonar y colocar texto en encabezados
         function crearHeader(texto) {
             const clon = tplHeader.content.cloneNode(true);
-            clon.querySelector('.texto-header').textContent = texto;
+            clon.querySelector('.texto-header').innerHTML = texto;
             return clon.querySelector('.header_inicial'); 
         }
 
         //Crear toda la primera fila
         // Celda esquina superior izquierda
-        const celdaEsquina = tablaIngreso.appendChild(crearHeader("Origen / Destino"));
+        const celdaEsquina = tablaIngreso.appendChild(crearHeader("Origen&nbsp;/ <br> Destino"));
         celdaEsquina.classList.add('columna_fija');
         
         for (let c = 1; c <= columnas; c++) {
@@ -199,19 +199,14 @@ document.addEventListener('DOMContentLoaded', function() {
          
         const tplHeader = document.getElementById("template_header_paso");
         const tplCelda = document.getElementById("template_celda_span");
-         
-        // function crearHeader(texto) {
-        //     const clon = tplHeader.content.cloneNode(true);
-        //     clon.querySelector('.texto-header').textContent = texto;
-        //     return clon;
-        // }
+
         function crearHeader(texto) {
             const clon = tplHeader.content.cloneNode(true);
-            clon.querySelector('.texto-header').textContent = texto;
+            clon.querySelector('.texto-header').innerHTML = texto;
             return clon.querySelector('.header_solucion'); 
         }
             
-        const celdaEsquina = tablaPasos.appendChild(crearHeader("Origen / Destino"));
+        const celdaEsquina = tablaPasos.appendChild(crearHeader("Origen&nbsp;/ <br> Destino"));
         celdaEsquina.classList.add('columna_fija');
 
         for (let c = 1; c <= columnas; c++) {
@@ -285,5 +280,38 @@ document.addEventListener('DOMContentLoaded', function() {
             
             
             
+    tablaIngreso.addEventListener('focusin', function(e) {
+        if (e.target.classList.contains('input-celda')) {
+            const contenedor = tablaIngreso;
+            const celdaActual = e.target.closest('.celda_inicial');
+            if (!celdaActual) return;
+
+            const anchoColumnaFija = 104; 
+
+            //Posición física de la celda dentro de la matriz Grid
+            const celdaLeft = celdaActual.offsetLeft;
+            const celdaWidth = celdaActual.offsetWidth;
+
+            //Límites visibles del contenedor con scroll
+            const scrollLeftActual = contenedor.scrollLeft;
+            const anchoVisibleContenedor = contenedor.clientWidth;
+
+            //Moviéndose a la derecha -> Si la celda se sale por el borde derecho de la pantalla
+            if ((celdaLeft + celdaWidth) > (scrollLeftActual + anchoVisibleContenedor)) {
+                contenedor.scrollTo({
+                    left: celdaLeft + celdaWidth - anchoVisibleContenedor + 12,
+                    behavior: 'smooth'
+                });
+            }
+            
+            //Moviéndose a la izquierda -> Forzar a que la celda se alinee al lado de las letras
+            else if (celdaLeft < (scrollLeftActual + anchoColumnaFija)) {
+                contenedor.scrollTo({
+                    left: celdaLeft - anchoColumnaFija - 14,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
             
 });
