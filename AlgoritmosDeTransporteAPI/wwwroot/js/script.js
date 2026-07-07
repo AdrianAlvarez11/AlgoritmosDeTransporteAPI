@@ -158,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     const btnSolPaso = document.getElementById("SolucionPaso");
+    const btnSolDirecta = document.getElementById("SolucionDirecta");
     const tablaPasos = document.getElementById("tabla_pasos");
 
 
@@ -169,11 +170,12 @@ document.addEventListener('DOMContentLoaded', function() {
         //////////////////////////////////
         //tabla procedimiento
          
-        if (guardarDatosIniciales()) {
+        let mensajeError = guardarDatosIniciales();
+        if (mensajeError == "") {
             CambiarVista("procedimiento");
         }
         else {
-            spnError.textContent = "Ingresa un valor a cada celda.";
+            spnError.textContent = mensajeError;
             return;
         }
         
@@ -260,20 +262,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
             
     });
+
+    btnSolDirecta.addEventListener('click', function(e){ 
+        spnError.textContent = "";
+         
+        let mensajeError = guardarDatosIniciales();
+        if (mensajeError == "") {
+            CambiarVista("resultados");
+        }
+        else {
+            spnError.textContent = mensajeError;
+            return;
+        }
+    });
             
             
     function guardarDatosIniciales() {
         const datos = {};
         const inputs = Array.from(document.querySelectorAll('#tabla_ingreso .input-celda'));
         
-        if (inputs.some(input => input.value.trim() === "")) return false;
+        if(inputs.length == 0) return "Genera una tabla primero.";
+        if (inputs.some(input => input.value.trim() === "")) return "Ingresa un valor a cada celda.";
 
         inputs.forEach((input, index) => {
             datos[`celda_${index}`] = input.value.trim();
         });
         
         localStorage.setItem('datosMatriz', JSON.stringify(datos));
-        return true;
+        return "";
     }
             
             
