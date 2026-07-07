@@ -88,7 +88,7 @@ section select {
     padding: 2px 0 2px 6px;
 }
 
-section select, section button {
+section select, section button, .opciones-resultados a, .navegacion_procedimientos textarea {
     border-radius: 5px;
     border: 1px solid #767676;
     font-size: 16px;
@@ -110,7 +110,7 @@ section #selector_tamano button {
     color: #fff;
 }
 
-section #selector_tamano button:hover, section #selector_metodo button:hover, .navegacion_procedimientos button:hover, .opciones-resultados button:hover  {
+section #selector_tamano button:hover, section #selector_metodo button:hover, .navegacion_procedimientos button:hover, .opciones-resultados button:hover, .opciones-resultados a:hover  {
     background-color: #51bb7f;
 }
 
@@ -125,12 +125,8 @@ section .tabla-ingreso, section .tabla-pasos {
     overflow-x: auto;
     min-height: 200px;
     contain: paint;
-
-}
-
-section .tabla-ingreso {
     margin: 0 0 130px 0;
-    
+
 }
 
 section .tabla-ingreso > div, section .tabla-pasos > div  {
@@ -264,6 +260,7 @@ section .navegacion_procedimientos {
     resize: none;
     min-height: 120px;
     width: 100%;
+    max-width: 300px;
 }
 
 .navegacion_procedimientos button {
@@ -275,7 +272,7 @@ section .navegacion_procedimientos {
 }
 
 .navegacion_procedimientos button img {
-    height: 100px;
+    height: 70px;
 }
 
 section .opciones-resultados {
@@ -286,21 +283,23 @@ section .opciones-resultados {
     margin: 0.8em 0.6em;
 }
 
-.opciones-resultados button {
+.opciones-resultados button, .opciones-resultados a {
+    text-align: start;
     flex: 1;
     white-space: normal;
     display: flex;
     gap: 4px;
     align-items: center;
     justify-content: start;
-    min-width: 80px;
+    /* min-width: 80px; */
     padding: 4px 12px 4px 18px;
     background-color: var(--fondo-boton-1);
     color: white;
     gap: 15px;
+    text-decoration: none;
 }
 
-.opciones-resultados button img {
+.opciones-resultados button img,  .opciones-resultados a img {
     height: 30px;
     width: 30px;
     
@@ -314,9 +313,9 @@ section iframe {
     display: block;
     justify-self: center;
     width: calc(100% - 1.2em);
-    max-width: 500px;
+    max-width: 600px;
     margin: 0.6em auto 0.6em auto;
-    min-height: 500px;
+    min-height: 700px;
     background-color: white;
 }
 
@@ -340,7 +339,8 @@ section iframe {
         margin: 1.8em 0.6em 2em 0.6em;
     }
 
-    .opciones-resultados button {
+    .opciones-resultados button, .opciones-resultados a {
+        text-align: center;
         flex-direction: column;
         gap: 4px;
         align-items: center;
@@ -379,8 +379,18 @@ section iframe {
     }
 
     section .navegacion_procedimientos {
+        display: flex;
         width: 100%;
-        max-width: 600px;
+        max-width: 700px;
+    }
+
+    section .navegacion_procedimientos textarea {
+        max-width: 100%;
+    }
+
+    section .navegacion_procedimientos button {
+        height: auto;
+        margin: 0;
     }
 
 }
@@ -427,7 +437,7 @@ section iframe {
         box-sizing: border-box;
     }
 
-    .opciones-resultados button { 
+    .opciones-resultados button, .opciones-resultados a { 
         font-size: 18px;
     }
 
@@ -440,6 +450,9 @@ section iframe {
         max-width: 935px;
     }
 
+    section .navegacion_procedimientos {
+        gap: 7px;
+    }
 }
 
 
