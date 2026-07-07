@@ -20,12 +20,13 @@ html, body {
 header{
     display: flex;
     align-items: center;
- 
+    padding: 0 0.6em;
+    gap: 0.3em;
     background-color: var(--primario-fuerte);
 }
 
 header label {
-    margin: 0.3em;
+    margin: 0.3em 0;
     display: inline-block;
     font-size: 21px;
 }
@@ -46,8 +47,8 @@ header nav ul {
     background-color: white;
     border: 1px solid gray;
     width: 80px;
-    left: 10px;
-    top: 6px;
+    left: 28px;
+    top: 12px;
     padding: 0;
 }
 
@@ -61,6 +62,7 @@ header nav ul li {
 header nav ul li:hover {
     background-color: var(--fondo);
 }
+
 header nav ul li button {
     padding: 2px 5px;
     margin: 0;
@@ -121,15 +123,17 @@ section .tabla-ingreso, section .tabla-pasos {
     overflow-x: auto;
     min-height: 200px;
     contain: paint;
+
 }
 
 section .tabla-ingreso {
-    margin: 0 0 95px 0;
+    margin: 0 0 130px 0;
     
 }
 
 section .tabla-ingreso > div, section .tabla-pasos > div  {
     min-width: 100px;
+    max-width: 160px;
     min-height: 35px;
     text-align: center;
     align-content: center;
@@ -144,7 +148,6 @@ section .tabla-ingreso span {
     position: sticky !important;
     left: 0 !important;
     z-index: 5;
-    background-color: var(--primario-fuerte) !important;
     border-radius: 5px;
     box-shadow: -4px 0px 0px var(--fondo);
 }
@@ -210,7 +213,7 @@ section #selector_metodo {
     background-color: #daf9f9;
     margin: 0;
     z-index: 10;
-    box-shadow: 0px -4px 15px var(--sombra)
+    /* box-shadow: 0px -2px 15px var(--sombra) */
 }
 
 
@@ -320,19 +323,39 @@ section iframe {
         grid-column: span 2;
     }
 
-
-    /* section #selector_metodo {
-        width: 100% !important; 
-        max-width: 100%;
-        grid-template-columns: 300px 300px; 
-        justify-content: center; 
-        padding: 15px 20px 25px 20px;
-        box-sizing: border-box;
-    } */
-
 }
 
 @media (min-width : 615px) {
+
+    header{
+        padding: 3px;
+        gap: 2px;
+    }
+
+    header label {
+        margin: 0.2em 0.3em;
+        font-size: 22px;
+    }
+
+    header img {
+        height: 34px;
+    }
+
+    header nav ul {
+        width: 90px;
+        left: 30px;
+        top: 15px;
+    }
+
+    header nav ul li {
+        padding: 2px 5px;
+    }
+
+    header nav ul li button {
+        font-size: 15px;
+    }
+
+
     section #selector_metodo {
         width: 100% !important; 
         max-width: 100%;
@@ -342,7 +365,17 @@ section iframe {
         box-sizing: border-box;
     }
 
+
+
 }
 
+
+@media (min-width : 750px) {
+    section .tabla-ingreso, section .tabla-pasos {
+        justify-self: center;
+        max-width: 935px;
+    }
+
+}
 
 
