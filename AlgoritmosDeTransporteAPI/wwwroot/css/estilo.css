@@ -457,6 +457,10 @@ section iframe {
     section .navegacion_procedimientos {
         gap: 7px;
     }
+
+    .header_solucion, .celda_solucion{
+        width: 160px;
+    }
 }
 
 
