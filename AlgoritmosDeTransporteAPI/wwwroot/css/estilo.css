@@ -8,6 +8,7 @@
     --borde:#ccc;
     --sombra:#dfefe7cc;
     --fondo-boton-1: #4aab77;
+
 }
 
 html, body {
@@ -94,10 +95,11 @@ section select, section button {
 }
 
 
-section #selector_tamano {
+section #selector_tamano, section #encabezado_pasos {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    height: 168px;
 }
 
 section #selector_tamano button {
@@ -108,7 +110,7 @@ section #selector_tamano button {
     color: #fff;
 }
 
-section #selector_tamano button:hover, section #selector_metodo button:hover {
+section #selector_tamano button:hover, section #selector_metodo button:hover, .navegacion_procedimientos button:hover, .opciones-resultados button:hover  {
     background-color: #51bb7f;
 }
 
@@ -140,6 +142,11 @@ section .tabla-ingreso > div, section .tabla-pasos > div  {
     border-radius: 5px;
 }
 
+section .tabla-pasos > div span {
+    display: inline-block;
+    width: calc(100% - 35px);
+}
+
 section .tabla-ingreso span {
     white-space: nowrap;
 }
@@ -168,20 +175,23 @@ section .tabla-ingreso span {
     border-radius: 5px;
 }
 
-.header_inicial {
+.header_inicial, .header_solucion {
     background-color: var(--primario-fuerte);
 }
 
-.celda_inicial {
+.celda_inicial, .celda_solucion {
     background-color: var(--primario-suave);
     overflow: hidden;
 }
 
-.header_solucion {
+.celda_movimiento {
     background-color: var(--secundario-fuerte);
+    /* background-color: #e3f2fd; */
+    /* background-color: #e0f7fa; */
+    color: #0d47a1;
 }
 
-.celda_solucion {
+.celda_eliminada {
     background-color: var(--secundario-suave);
 }
 
@@ -199,6 +209,17 @@ section .tabla-ingreso span {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 15px;
 }
+
+
+section h2 {
+    text-align: center;
+    margin: 0.5em 0;
+} 
+
+section p {
+    text-align: center;
+    margin: 0.5em 0;
+} 
 
 section #selector_metodo {
     right: 0;
@@ -245,14 +266,21 @@ section .navegacion_procedimientos {
     width: 100%;
 }
 
-.navegacion_procedimientos img {
+.navegacion_procedimientos button {
     grid-row: 2;
+    height: 100px;
+    background-color: var(--fondo-boton-1);
+    padding: 0 0 4px 0;
+    margin-top: 10px;
+}
+
+.navegacion_procedimientos button img {
     height: 100px;
 }
 
 section .opciones-resultados {
     display: flex;
-    justify-self: center;
+    flex-direction: column;
     align-items: stretch;
     gap: 8px;
     margin: 0.8em 0.6em;
@@ -262,12 +290,14 @@ section .opciones-resultados {
     flex: 1;
     white-space: normal;
     display: flex;
-    flex-direction: column;
     gap: 4px;
     align-items: center;
-    justify-content: space-around;
+    justify-content: start;
     min-width: 80px;
-    padding: 4px 6px;
+    padding: 4px 12px 4px 18px;
+    background-color: var(--fondo-boton-1);
+    color: white;
+    gap: 15px;
 }
 
 .opciones-resultados button img {
@@ -277,8 +307,6 @@ section .opciones-resultados {
 }
 
 section#resultados {
-    /* display: flex;
-    flex-direction: column; */
     margin: 0 0 40px 0;
 }
 
@@ -286,7 +314,7 @@ section iframe {
     display: block;
     justify-self: center;
     width: calc(100% - 1.2em);
-    max-width: 450px;
+    max-width: 500px;
     margin: 0.6em auto 0.6em auto;
     min-height: 500px;
     background-color: white;
@@ -302,6 +330,25 @@ section iframe {
   display: none !important;
 }
 
+@media (min-width : 380px) {
+
+    section .opciones-resultados {
+        flex-direction: row;
+        justify-self: center;
+        align-items: stretch;
+        gap: 8px;
+        margin: 1.8em 0.6em 2em 0.6em;
+    }
+
+    .opciones-resultados button {
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+        justify-content: space-around;
+        padding: 4px 6px;
+    }
+}
+
 
 @media (min-width : 470px) {
 
@@ -312,6 +359,7 @@ section iframe {
         justify-self: center;
         width: 600px;
         max-width: 100%;
+        height: 120px;
     }
 
     
@@ -323,7 +371,21 @@ section iframe {
         grid-column: span 2;
     }
 
+    section #encabezado_pasos {
+        justify-self: center;
+        width: 600px;
+        max-width: 100%;
+        height: 120px;
+    }
+
+    section .navegacion_procedimientos {
+        width: 100%;
+        max-width: 600px;
+    }
+
 }
+
+
 
 @media (min-width : 615px) {
 
@@ -365,7 +427,9 @@ section iframe {
         box-sizing: border-box;
     }
 
-
+    .opciones-resultados button { 
+        font-size: 18px;
+    }
 
 }
 
@@ -378,4 +442,30 @@ section iframe {
 
 }
 
+
+@media (min-width : 890px) {
+
+    header{
+        padding: 6px 3px;
+    }
+
+    header label {
+        font-size: 23px;
+    }
+
+    header img {
+        height: 38px;
+    }
+
+    header nav ul {
+        width: 92px;
+        left: 36px;
+        top: 19px;
+    }
+
+    header nav ul li button {
+        font-size: 16px;
+    }
+
+}
 
