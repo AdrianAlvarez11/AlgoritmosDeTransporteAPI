@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmos de transporte</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <script src="/js/script.js"></script>
+</head>
+<body>
+    <header>
+        <label id="label_opciones"><i class="fas fa-bars  text-primary"></i></label>
+        <nav class="invisible">
+            <ul>
+                <li><button data-section="ingresar-datos">Reiniciar</button></li>
+                <li><button data-section="resultados">Imprimir</button></li>
+                <li><button>Guardar</button></li>
+            </ul>
+        </nav>
+        <img src="/imgs/metodotransporte.png">
+    </header>
+    
+    <main>
+        
+        <!-- ----------------------------------------- -->
+        <section id="ingresar-datos">
+            <h1>Solución de métodos de transporte</h1>
+
+            <div id="selector_tamano">
+                <span>Cantidad de filas:</span>
+                <select id="filas">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            
+                <span>Cantidad de columnas:</span>
+                <select id="columnas">
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <button id="crearTabla">Crear tabla</button>
+                <span id="error" class="r"></span>
+            </div>
+            
+            <!-- tabla -->
+            <div class="tabla-ingreso" id="tabla_ingreso"></div>
+            
+
+            <template id="template_header_inicial">
+                <div class="header_inicial">
+                    <span class="texto-header"></span>
+                </div>
+            </template>
+
+            <template id="template_celda_input">
+                <div class="celda_inicial">
+                    <input type="number" class="input-celda" min="0">
+                </div>
+            </template>
+
+            <div id="selector_metodo">
+                <span for="seleccion_metodo">Selecciona un método:</span>
+                <select id="seleccion_metodo">
+                    <option selected>Esquina noroeste</option>
+                    <option>Voguel</option>
+                    <option>Euler</option>
+                </select>
+                
+                <!-- data-section="procedimiento" -->
+                <button id="SolucionPaso">Solución paso a paso</button>
+                <button id="SolucionDirecta">Solución directa</button>
+            </div>
+        </section>
+
+
+
+        <section id="procedimiento" hidden>
+
+            <div id="encabezado_pasos">
+                <h2>Solución mediante método de Esquina Noroeste</h2>
+                <!-- <p>Ejecutando iteración paso a paso</p> -->
+                <!-- Control por si es necesario colocar un subtitulo, numero o titulo al paso. -->
+            </div>
+
+            <!-- tabla -->
+            <div class="tabla-pasos" id="tabla_pasos"></div>
+            
+            <template id="template_header_paso">
+                <div class="header_solucion">
+                    <span class="texto-header"></span>
+                </div>
+            </template>
+
+            <template id="template_celda_span">
+                <div class="celda_solucion">
+                    <span class="span-celda"></span>
+                </div>
+            </template>
+
+            <div class="navegacion_procedimientos">
+                <button>
+                    <img src="/imgs/arrow.png" style="transform: rotate(180deg);">
+                </button>
+                <textarea readonly></textarea>
+                <button>
+                    <img src="/imgs/arrow.png">
+                </button>
+            </div>
+
+        </section>
+    
+
+        <!-- ----------------------------------------- -->
+
+        <section id="resultados" hidden>
+
+            <div class="opciones-resultados">
+                <button data-section="ingresar-datos">
+                    <img src="/imgs/home.png">
+                    <span>Volver al inicio</span>
+                </button>
+                
+        
+                <a href="/CARTA DE TERMINACION SERVICIO SOCIAL.pdf" download>
+                    <img src="/imgs/downloadPdf.png">
+                    <span>Guardar</span>
+                </a>
+                
+                <a href="/CARTA DE TERMINACION SERVICIO SOCIAL.pdf" target="_blank">
+                    <img src="/imgs/printer.png">
+                    <span>Imprimir</span>
+                </a>
+                
+                <button data-section="ingresar-datos">
+                    <img src="/imgs/continueArrow.png">
+                    <span>Continuar</span>
+                </button>
+            </div>
+
+            <iframe></iframe>
+        </section>
+    </main>
+</body>
+</html>

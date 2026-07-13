@@ -33,6 +33,6 @@ app.UseStaticFiles();
 app.UseCors("SpaLocal");
 app.MapControllers();
 
-app.MapGet("/", () => Results.Redirect("/index.html"));
+app.MapGet("/", () => Results.Redirect("/html/index.html"));
 
 app.Run();
