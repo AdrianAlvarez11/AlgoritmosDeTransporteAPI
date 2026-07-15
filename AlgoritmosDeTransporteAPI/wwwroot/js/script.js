@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
         celdaEsquina.classList.add('columna_fija');
         
         for (let c = 1; c <= columnas; c++) {
-            tablaIngreso.appendChild(crearHeader(c));
+            const letraColumna = String.fromCharCode(64 + c);
+            tablaIngreso.appendChild(crearHeader(letraColumna));
         }
 
         tablaIngreso.appendChild(crearHeader("Oferta"));
@@ -120,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let f = 0; f < filas; f++) {
         
             // A. Colocar el texto de la celda de la 
-            const letraFila = String.fromCharCode(65 + f); 
-            const celdaLetra = crearHeader(letraFila);
+            const numFila = f + 1; 
+            const celdaLetra = crearHeader(numFila);
             celdaLetra.classList.add('columna_fija');
             tablaIngreso.appendChild(celdaLetra);
 
@@ -130,8 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const clonCelda = tplCelda.content.cloneNode(true);
                 const input = clonCelda.querySelector('.input-celda');
                 
-                input.dataset.fila = letraFila;
-                input.dataset.columna = c + 1;
+                input.dataset.fila = numFila;
+                input.dataset.columna = String.fromCharCode(64 + c);
                 
                 tablaIngreso.appendChild(clonCelda);
             }
@@ -210,9 +211,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
         const celdaEsquina = tablaPasos.appendChild(crearHeader("Origen&nbsp;/ <br> Destino"));
         celdaEsquina.classList.add('columna_fija');
-
+        
         for (let c = 1; c <= columnas; c++) {
-            tablaPasos.appendChild(crearHeader(c));
+            const letraColumna = String.fromCharCode(64 + c);
+            tablaPasos.appendChild(crearHeader(letraColumna));
         }
         
         tablaPasos.appendChild(crearHeader("Oferta"));
@@ -221,17 +223,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Crear las filas internas
         
         for (let f = 0; f < filas; f++) {
-            
-            const letraFila = String.fromCharCode(65 + f);
-            let celdaLetra = tablaPasos.appendChild(crearHeader(letraFila));
+            const numFila = f + 1; 
+            const celdaLetra = tablaPasos.appendChild(crearHeader(numFila));
             celdaLetra.classList.add("columna_fija");
             
             for (let c = 0; c < columnas; c++) {
                 const clonCelda = tplCelda.content.cloneNode(true);
                 const span = clonCelda.querySelector('.span-celda');
                 
-                span.dataset.fila = letraFila;
-                span.dataset.columna = c + 1;
+                span.dataset.fila = numFila;
+                span.dataset.columna = String.fromCharCode(64 + c);
 
                 span.textContent = datosGuardados[`celda_${(indexCelda)}`] || '';
                 indexCelda++;
@@ -247,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             tablaPasos.appendChild(clonOferta);
         }
-            
+        
             
         const celdaDemanda = tablaPasos.appendChild(crearHeader("Demanda")).classList.add("columna_fija");
         
