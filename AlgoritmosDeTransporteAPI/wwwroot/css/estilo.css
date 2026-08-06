@@ -309,15 +309,14 @@ section#resultados {
     margin: 0 0 40px 0;
 }
 
-section iframe {
-    display: block;
-    justify-self: center;
-    width: calc(100% - 1.2em);
-    max-width: 600px;
-    margin: 0.6em auto 0.6em auto;
-    min-height: 700px;
-    background-color: white;
-}
+#solucion_directa { max-width: 935px; margin: .6em auto; }
+.resumen-solucion { text-align: center; background: white; border-radius: 5px; padding: 10px; margin-bottom: 10px; }
+.tabla-resultado { display: grid; gap: 4px; overflow-x: auto; padding: 4px; }
+.tabla-resultado > div { min-width: 110px; min-height: 55px; box-sizing: border-box; border-radius: 5px; text-align: center; align-content: center; }
+.celda-resultado { background-color: var(--primario-suave); }
+.celda-resultado .costo { display: block; font-size: 13px; }
+.celda-resultado .asignacion { display: block; font-weight: bold; font-size: 18px; }
+.ficticia { opacity: .72; }
 
 
 
