@@ -69,12 +69,12 @@ public sealed class TransporteService : ITransporteService
         if (totalOferta > totalDemanda + Tolerance)
         {
             columnas++;
-            balanceAgregado = $"Demanda ficticia de {totalOferta - totalDemanda:0.##}";
+            balanceAgregado = $"Total de oferta: {totalOferta}\nTotal de demanda: {totalDemanda}.\nSe agrega demanda ficticia de {totalOferta - totalDemanda:0.##}";
         }
         else if (totalDemanda > totalOferta + Tolerance)
         {
             filas++;
-            balanceAgregado = $"Oferta ficticia de {totalDemanda - totalOferta:0.##}";
+            balanceAgregado = $"Total de oferta: {totalOferta}\nTotal de demanda: {totalDemanda}.\nSe agrega oferta ficticia de {totalDemanda - totalOferta:0.##}";
         }
 
         var costos = new decimal[filas, columnas];
@@ -232,7 +232,9 @@ public sealed class TransporteService : ITransporteService
         }
     }
 
-    private static (int Fila, int Columna)? SeleccionarCeldaCostoMinimo(ContextoResolucion contexto)
+    private static (int Fila, int Columna)? SeleccionarCeldaCostoMinimo(ContextoResolucion
+        
+        contexto)
     {
         (int Fila, int Columna)? seleccion = null;
         var menorCosto = decimal.MaxValue;
