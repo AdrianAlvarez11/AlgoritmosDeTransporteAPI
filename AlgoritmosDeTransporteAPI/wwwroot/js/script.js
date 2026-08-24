@@ -11,6 +11,43 @@
     botonDirecta.addEventListener('click', () => resolverProblema(false));
     document.getElementById('SolucionPaso').addEventListener('click', () => resolverProblema(true));
 
+    document.getElementById('nav_imprimir').addEventListener('click', () => generarPdf('imprimir'));
+    document.getElementById('nav_guardar').addEventListener('click', () => generarPdf('guardar'));
+
+    // Asignar los eventos a los botones si existen, usando validación opcional
+    const btnImprimir = document.getElementById('btn_imprimir');
+    if (btnImprimir) btnImprimir.addEventListener('click', () => generarPdf('imprimir'));
+
+    const btnGuardar = document.getElementById('btn_guardar');
+    if (btnGuardar) btnGuardar.addEventListener('click', () => generarPdf('guardar'));
+
+    async function generarPdf(accion) {
+        let datos;
+        try { datos = construirProblema(true); } catch (e) { alert(e.message); return; }
+        try {
+            const r = await fetch('/api/problemas/reporte', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) });
+            if (!r.ok) {
+                const json = await r.json().catch(() => ({}));
+                throw Error((json.errores || ['No se pudo generar el reporte.']).join(' '));
+            }
+            const blob = await r.blob();
+            const url = URL.createObjectURL(blob);
+            if (accion === 'guardar') {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'solucion-transporte.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                window.open(url, '_blank');
+            }
+            setTimeout(() => URL.revokeObjectURL(url), 10000);
+        } catch (e) {
+            alert(e.message || 'No fue posible conectar con la API.');
+        }
+    }
+
     function mostrarVista(id) {
         document.querySelectorAll('main section').forEach(s => s.hidden = s.id !== id);
         sessionStorage.setItem('idVista', id);

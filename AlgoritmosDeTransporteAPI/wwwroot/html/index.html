@@ -14,8 +14,8 @@
         <nav class="invisible">
             <ul>
                 <li><button data-section="ingresar-datos">Reiniciar</button></li>
-                <li><button data-section="resultados">Imprimir</button></li>
-                <li><button>Guardar</button></li>
+                <li><button id="nav_imprimir">Imprimir</button></li>
+                <li><button id="nav_guardar">Guardar</button></li>
             </ul>
         </nav>
         <img src="/imgs/metodotransporte.png">
@@ -129,18 +129,17 @@
                     <img src="/imgs/home.png">
                     <span>Volver al inicio</span>
                 </button>
-                
-        
-                <a href="/CARTA DE TERMINACION SERVICIO SOCIAL.pdf" download>
+
+                <button type="button" id="btn_guardar">
                     <img src="/imgs/downloadPdf.png">
                     <span>Guardar</span>
-                </a>
-                
-                <a href="/CARTA DE TERMINACION SERVICIO SOCIAL.pdf" target="_blank">
+                </button>
+
+                <button type="button" id="btn_imprimir">
                     <img src="/imgs/printer.png">
                     <span>Imprimir</span>
-                </a>
-                
+                </button>
+
                 <button data-section="ingresar-datos">
                     <img src="/imgs/continueArrow.png">
                     <span>Continuar</span>

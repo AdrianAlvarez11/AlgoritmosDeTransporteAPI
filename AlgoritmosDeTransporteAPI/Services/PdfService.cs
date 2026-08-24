@@ -12,10 +12,21 @@ namespace AlgoritmosDeTransporteAPI.Services;
 
 public sealed class PdfService : IPdfService
 {
-    private static readonly PdfFont BoldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+    private PdfFont BoldFont = null!;
+    private PdfFont RegularFont = null!;
+
+    private static readonly DeviceRgb ColorEncabezado = new DeviceRgb(130, 226, 179);
+    private static readonly DeviceRgb ColorCeldaAsignada = new DeviceRgb(214, 245, 227);
+    private static readonly DeviceRgb ColorCeldaVacia = new DeviceRgb(240, 253, 246);
+    private static readonly DeviceRgb ColorCeldaFicticia = new DeviceRgb(253, 236, 220);
+    private static readonly DeviceRgb ColorCeldaMovimiento = new DeviceRgb(255, 244, 179);
+    private static readonly DeviceRgb ColorTextoGris = new DeviceRgb(110, 110, 110);
 
     public byte[] GenerarReporte(Problema problema)
     {
+        BoldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+        RegularFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+
         using var stream = new MemoryStream();
         using var writer = new PdfWriter(stream);
         using var pdf = new PdfDocument(writer);
@@ -32,63 +43,182 @@ public sealed class PdfService : IPdfService
             ? "Balance: el problema ya estaba balanceado."
             : $"Balance: {problema.BalanceAgregado}."));
 
-        document.Add(new Paragraph("Matriz final")
-            .SetFontSize(14)
-            .SetFont(BoldFont)
-            .SetMarginTop(14));
-        document.Add(CrearTablaMatriz(problema.Matriz));
-
         if (problema.Pasos.Count > 0)
         {
-            document.Add(new Paragraph("Pasos")
+            document.Add(new Paragraph("Procedimiento paso a paso")
                 .SetFontSize(14)
                 .SetFont(BoldFont)
-                .SetMarginTop(14));
+                .SetMarginTop(16)
+                .SetMarginBottom(4));
 
             foreach (var paso in problema.Pasos)
             {
-                document.Add(new Paragraph($"{paso.Numero}. {paso.Titulo}")
+                document.Add(new Paragraph($"Paso {paso.Numero}: {paso.Titulo}")
                     .SetFont(BoldFont)
-                    .SetMarginTop(8)
+                    .SetFontSize(12)
+                    .SetMarginTop(14)
                     .SetMarginBottom(2));
-                document.Add(new Paragraph(paso.Descripcion).SetMarginTop(0));
+
+                document.Add(new Paragraph(paso.Descripcion)
+                    .SetFontSize(10)
+                    .SetMarginTop(0)
+                    .SetMarginBottom(6));
+
+                document.Add(CrearTablaPaso(paso));
 
                 if (paso.PenalizacionesFilas is not null || paso.PenalizacionesColumnas is not null)
                 {
                     document.Add(new Paragraph(CrearResumenPenalizaciones(paso))
                         .SetFontSize(9)
-                        .SetFontColor(ColorConstants.DARK_GRAY));
+                        .SetFontColor(ColorTextoGris)
+                        .SetMarginTop(4));
                 }
             }
         }
+
+        document.Add(new Paragraph("Matriz final")
+            .SetFontSize(14)
+            .SetFont(BoldFont)
+            .SetMarginTop(18));
+        document.Add(CrearTablaFinal(problema.Matriz, problema.Ofertas, problema.Demandas));
 
         document.Close();
         return stream.ToArray();
     }
 
-    private static Table CrearTablaMatriz(IReadOnlyList<IReadOnlyList<Celda>> matriz)
+    // ---------- Tablas con encabezados (Origen/Destino, Oferta, Demanda) ----------
+
+    private Table CrearTablaConEncabezados(
+        IReadOnlyList<IReadOnlyList<Celda>> matriz,
+        IReadOnlyList<double> ofertas,
+        IReadOnlyList<double> demandas,
+        int? filaSeleccionada = null,
+        int? columnaSeleccionada = null)
     {
-        var columnas = matriz.Count == 0 ? 1 : matriz[0].Count;
-        var table = new Table(UnitValue.CreatePercentArray(columnas)).UseAllAvailableWidth();
+        var filas = matriz.Count;
+        var columnas = filas == 0 ? 0 : matriz[0].Count;
+        var totalColumnas = columnas + 2;
 
-        foreach (var fila in matriz)
+        var table = new Table(UnitValue.CreatePercentArray(totalColumnas))
+            .UseAllAvailableWidth()
+            .SetMarginBottom(4);
+
+        // Fila de encabezado (Origen/Destino, 1, 2, 3..., Oferta)
+        table.AddHeaderCell(CrearCeldaEncabezado("Origen /\nDestino"));
+        for (var j = 0; j < columnas; j++)
         {
-            foreach (var celda in fila)
-            {
-                var contenido = $"Costo: {celda.Costo:0.##}\nAsig.: {celda.Asignacion:0.##}";
-                if (celda.EsFicticia)
-                {
-                    contenido += "\nFicticia";
-                }
+            table.AddHeaderCell(CrearCeldaEncabezado((j + 1).ToString()));
+        }
+        table.AddHeaderCell(CrearCeldaEncabezado("Oferta"));
 
-                table.AddCell(new Cell()
-                    .Add(new Paragraph(contenido).SetFontSize(9))
-                    .SetBorder(new SolidBorder(ColorConstants.LIGHT_GRAY, 0.75f))
-                    .SetBackgroundColor(celda.Asignacion > 0 ? new DeviceRgb(229, 244, 234) : ColorConstants.WHITE));
+        // Filas de datos (número de origen, costos/asignaciones, oferta)
+        for (var i = 0; i < filas; i++)
+        {
+            table.AddCell(CrearCeldaEncabezado((i + 1).ToString()));
+            for (var j = 0; j < columnas; j++)
+            {
+                var celda = matriz[i][j];
+                var esMovimiento = filaSeleccionada == i && columnaSeleccionada == j;
+                table.AddCell(CrearCeldaContenido(celda, esMovimiento));
             }
+            var valorOferta = i < ofertas.Count ? ofertas[i] : 0;
+            table.AddCell(CrearCeldaValor(valorOferta));
         }
 
+        // Fila de demanda
+        table.AddCell(CrearCeldaEncabezado("Demanda"));
+        for (var j = 0; j < columnas; j++)
+        {
+            var valorDemanda = j < demandas.Count ? demandas[j] : 0;
+            table.AddCell(CrearCeldaValor(valorDemanda));
+        }
+        table.AddCell(new Cell().SetBorder(Border.NO_BORDER));
+
         return table;
+    }
+
+    private Table CrearTablaFinal(
+        IReadOnlyList<IReadOnlyList<Celda>> matriz,
+        IReadOnlyList<double> ofertas,
+        IReadOnlyList<double> demandas)
+        => CrearTablaConEncabezados(matriz, ofertas, demandas);
+
+    private Table CrearTablaPaso(PasoResolucion paso)
+        => CrearTablaConEncabezados(
+            paso.Matriz,
+            paso.OfertasRestantes,
+            paso.DemandasRestantes,
+            paso.FilaSeleccionada,
+            paso.ColumnaSeleccionada);
+
+    // ---------- Estilos de celda ----------
+
+    private Cell CrearCeldaEncabezado(string texto)
+    {
+        return new Cell()
+            .Add(new Paragraph(texto)
+                .SetFont(BoldFont)
+                .SetFontSize(10)
+                .SetTextAlignment(TextAlignment.CENTER))
+            .SetBackgroundColor(ColorEncabezado)
+            .SetBorder(new SolidBorder(ColorConstants.WHITE, 2f))
+            .SetPadding(6)
+            .SetVerticalAlignment(VerticalAlignment.MIDDLE);
+    }
+
+    private Cell CrearCeldaValor(double valor)
+    {
+        return new Cell()
+            .Add(new Paragraph(valor.ToString("0.##"))
+                .SetFontSize(10)
+                .SetTextAlignment(TextAlignment.CENTER))
+            .SetBackgroundColor(ColorCeldaVacia)
+            .SetBorder(new SolidBorder(ColorConstants.WHITE, 2f))
+            .SetPadding(6)
+            .SetVerticalAlignment(VerticalAlignment.MIDDLE);
+    }
+
+    private Cell CrearCeldaContenido(Celda celda, bool esMovimiento)
+    {
+        var fondo = celda.EsFicticia
+            ? ColorCeldaFicticia
+            : esMovimiento
+                ? ColorCeldaMovimiento
+                : celda.Asignacion > 0
+                    ? ColorCeldaAsignada
+                    : ColorCeldaVacia;
+
+        var contenedor = new Div().SetTextAlignment(TextAlignment.CENTER);
+
+        contenedor.Add(new Paragraph($"Costo: {celda.Costo:0.##}")
+            .SetFont(RegularFont)
+            .SetFontSize(8)
+            .SetFontColor(ColorTextoGris)
+            .SetMarginBottom(2)
+            .SetTextAlignment(TextAlignment.CENTER));
+
+        contenedor.Add(new Paragraph(celda.Asignacion > 0 ? celda.Asignacion.ToString("0.##") : "—")
+            .SetFont(celda.Asignacion > 0 ? BoldFont : RegularFont)
+            .SetFontSize(11)
+            .SetMarginTop(0)
+            .SetTextAlignment(TextAlignment.CENTER));
+
+        if (celda.EsFicticia)
+        {
+            contenedor.Add(new Paragraph("Ficticia")
+                .SetFont(RegularFont)
+                .SetFontSize(7)
+                .SetFontColor(ColorTextoGris)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetMarginTop(2));
+        }
+
+        return new Cell()
+            .Add(contenedor)
+            .SetBackgroundColor(fondo)
+            .SetBorder(new SolidBorder(ColorConstants.WHITE, 2f))
+            .SetPadding(6)
+            .SetVerticalAlignment(VerticalAlignment.MIDDLE);
     }
 
     private static string CrearResumenPenalizaciones(PasoResolucion paso)
@@ -118,5 +248,3 @@ public sealed class PdfService : IPdfService
         };
     }
 }
-
-
