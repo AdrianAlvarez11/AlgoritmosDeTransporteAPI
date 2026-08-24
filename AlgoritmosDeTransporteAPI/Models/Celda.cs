@@ -1,4 +1,4 @@
-﻿namespace AlgoritmosDeTransporteAPI.Domain;
+﻿namespace AlgoritmosDeTransporteAPI.Models;
 
 public sealed class Celda
 {

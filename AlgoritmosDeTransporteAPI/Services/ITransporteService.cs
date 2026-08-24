@@ -1,5 +1,5 @@
-using AlgoritmosDeTransporteAPI.Domain;
 using AlgoritmosDeTransporteAPI.DTOs;
+using AlgoritmosDeTransporteAPI.Models;
 
 namespace AlgoritmosDeTransporteAPI.Services;
 

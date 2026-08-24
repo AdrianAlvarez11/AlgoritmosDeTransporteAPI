@@ -1,5 +1,4 @@
-﻿using AlgoritmosDeTransporteAPI.Domain;
-using iText.IO.Font.Constants;
+﻿using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
@@ -7,6 +6,7 @@ using iText.Layout;
 using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using AlgoritmosDeTransporteAPI.Models;
 
 namespace AlgoritmosDeTransporteAPI.Services;
 
