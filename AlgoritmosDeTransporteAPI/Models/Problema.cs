@@ -1,4 +1,6 @@
-namespace AlgoritmosDeTransporteAPI.Domain;
+using AlgoritmosDeTransporteAPI.Models;
+
+namespace AlgoritmosDeTransporteAPI.Models;
 
 public sealed class Problema
 {

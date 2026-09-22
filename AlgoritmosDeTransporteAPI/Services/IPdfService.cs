@@ -1,4 +1,4 @@
-using AlgoritmosDeTransporteAPI.Domain;
+using AlgoritmosDeTransporteAPI.Models;
 
 namespace AlgoritmosDeTransporteAPI.Services;
 
